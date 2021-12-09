@@ -24,11 +24,15 @@ jobs:
         sudo dpkg --add-architecture i386
         sudo apt-get update -y -qq
         sudo apt-get install -y -qq build-essential gcc-multilib g++-multilib
+        
     - name: Set Android NDK
       env:
         ANDROID_NDK_HOME: $ANDROID_SDK_ROOT/ndk-bundle
       run:
         echo $ANDROID_NDK_HOME
+        
+    - name: Grant execute permission for build.sh
+        run: chmod +x build.sh
 
     - name: Build
       run: ANDROID_ABI=${{matrix.abi}} ./build.sh build-android ${{matrix.node}}
