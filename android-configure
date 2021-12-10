@@ -69,7 +69,13 @@ TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/$HOST_OS-$HOST_ARCH
 export PATH=$TOOLCHAIN/bin:$PATH
 export CC=$TOOLCHAIN/bin/$SUFFIX-clang
 export CXX=$TOOLCHAIN/bin/$SUFFIX-clang++
+export CXXFLAGS='-D_LIBCPP_HAS_NO_OFF_T_FUNCTIONS'
 
+export AR=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ar
+export LD=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ld
+export RANLIB=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ranlib
+export STRIP=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-strip
+export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
 
 GYP_DEFINES="target_arch=$ARCH"
 GYP_DEFINES+=" v8_target_arch=$ARCH"
