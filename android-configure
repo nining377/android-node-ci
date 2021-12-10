@@ -88,5 +88,6 @@ if [ -f "configure" ]; then
 		--without-node-code-cache \
 		--without-npm \
         --openssl-no-asm \
-        --cross-compiling
+        --cross-compiling \
+		--shared
 fi
