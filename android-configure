@@ -61,6 +61,8 @@ if [ -z $major ] || [ -z $minor ] || [ $major -lt 6 ] || ( [ $major -eq 6 ] && [
   exit 1
 fi
 
+echo "host gcc $host_gcc_version"
+
 SUFFIX="$TOOLCHAIN_NAME$ANDROID_SDK_VERSION"
 TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/$HOST_OS-$HOST_ARCH
 
