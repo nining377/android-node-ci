@@ -4,7 +4,9 @@ set -ex
 
 # Used in ./configure.
 CMD=${1:-build_x86_64}
-TAG=${2:-12.22.7}
+# 12.13.1-第一个v12 LTS版本
+# 14.2.0-第一个可以使用without-snapshot的版本
+TAG=${2:-12.13.1}
 
 download_and_extract() {
   local FILENAME="v$TAG.tar.gz"
