@@ -89,7 +89,7 @@ if [ -f "configure" ]; then
         --dest-os=android \
 #        --without-snapshot \
 #        --without-inspector \
-        --without-intl \
+#        --without-intl \
         --without-node-snapshot \
         --without-node-code-cache \
         --without-npm \
