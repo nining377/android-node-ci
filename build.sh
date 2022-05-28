@@ -4,9 +4,7 @@ set -ex
 
 # Used in ./configure.
 CMD=${1:-build_x86_64}
-TAG=${2:-12.22.7}
-
-export CONFIGURE_OPTIONS="--without-npm --with-intl=small-icu --shared"
+TAG=${2:-14.2.0}
 
 download_and_extract() {
   local FILENAME="v$TAG.tar.gz"
