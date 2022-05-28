@@ -6,7 +6,7 @@ set -ex
 CMD=${1:-build_x86_64}
 # 12.22.12-最新v12 LTS版本
 # 14.2.0-第一个可以使用without-snapshot的版本
-TAG=${2:-12.13.1}
+TAG=${2:-12.22.12}
 
 download_and_extract() {
   local FILENAME="v$TAG.tar.gz"
