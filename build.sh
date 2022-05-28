@@ -4,7 +4,7 @@ set -ex
 
 # Used in ./configure.
 CMD=${1:-build_x86_64}
-# 12.13.1-第一个v12 LTS版本
+# 12.22.12-最新v12 LTS版本
 # 14.2.0-第一个可以使用without-snapshot的版本
 TAG=${2:-12.13.1}
 
