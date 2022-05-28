@@ -87,7 +87,6 @@ if [ -f "configure" ]; then
     ./configure \
         --dest-cpu=$DEST_CPU \
         --dest-os=android \
-        --without-snapshot \
         --without-inspector \
         --without-intl \
         --without-node-snapshot \
