@@ -85,6 +85,7 @@ export GYP_DEFINES
 
 if [ -f "configure" ]; then
 	# 12.13.1
-    ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-npm --without-dtrace --without-etw --openssl-no-asm --cross-compiling --shared
+	./configure --dest-cpu=$DEST_CPU --dest-os=android --without-dtrace --without-etw --without-perfctr --without-ssl --without-inspector --without-intl --without-snapshot --with-arm-float-abi=hard --with-arm-fpu=neon --without-bundled-v8
+#   ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-npm --without-dtrace --without-etw --openssl-no-asm --cross-compiling --shared
 #	./configure --dest-cpu=$DEST_CPU --dest-os=android --without-snapshot --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-npm --without-dtrace --without-etw --without-corepack --openssl-no-asm --cross-compiling --shared
 fi
