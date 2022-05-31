@@ -70,13 +70,13 @@ TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/$HOST_OS-$HOST_ARCH
 export PATH=$TOOLCHAIN/bin:$PATH
 export CC=$TOOLCHAIN/bin/$SUFFIX-clang
 export CXX=$TOOLCHAIN/bin/$SUFFIX-clang++
+export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
 export CXXFLAGS='-D_LIBCPP_HAS_NO_OFF_T_FUNCTIONS'
 
-export AR=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ar
-export LD=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ld
-export RANLIB=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ranlib
-export STRIP=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-strip
-export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
+#export AR=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ar
+#export LD=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ld
+#export RANLIB=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ranlib
+#export STRIP=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-strip
 
 export AR_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ar
 export AS_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-as
