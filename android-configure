@@ -27,19 +27,23 @@ case $ARCH in
     arm)
         DEST_CPU="arm"
         TOOLCHAIN_NAME="armv7a-linux-androideabi"
+        PLATFORM_NAME="arm-linux-androideabi"
         ;;
     x86)
         DEST_CPU="ia32"
         TOOLCHAIN_NAME="i686-linux-android"
+        PLATFORM_NAME="i686-linux-android"
         ;;
     x86_64)
         DEST_CPU="x64"
         TOOLCHAIN_NAME="x86_64-linux-android"
+        PLATFORM_NAME="x86_64-linux-android"
         ARCH="x64"
         ;;
     arm64|aarch64)
         DEST_CPU="arm64"
         TOOLCHAIN_NAME="aarch64-linux-android"
+        PLATFORM_NAME="aarch64-linux-androideabi"
         ARCH="arm64"
         ;;
     *)
@@ -50,8 +54,15 @@ esac
 
 HOST_OS="linux"
 HOST_ARCH="x86_64"
+
 export CC_host=$(command -v gcc)
 export CXX_host=$(command -v g++)
+export AR_host="$(command -v ar)";
+export AS_host="$(command -v as)";
+export LD_host="$(command -v ld)";
+export NM_host="$(command -v nm)";
+export RANLIB_host="$(command -v ranlib)";
+export STRIP_host="$(command -v strip)";
 
 host_gcc_version=$($CC_host --version | grep gcc | awk '{print $NF}')
 major=$(echo $host_gcc_version | awk -F . '{print $1}')
@@ -71,11 +82,11 @@ export CC=$TOOLCHAIN/bin/$SUFFIX-clang
 export CXX=$TOOLCHAIN/bin/$SUFFIX-clang++
 export CXXFLAGS='-D_LIBCPP_HAS_NO_OFF_T_FUNCTIONS'
 
-#export AR=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ar
-#export LD=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ld
-#export RANLIB=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-ranlib
-#export STRIP=$TOOLCHAIN_DIR/bin/$TOOLCHAIN_NAME-strip
-#export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
+export AR=$TOOLCHAIN_DIR/bin/$PLATFORM_NAME-ar
+export LD=$TOOLCHAIN_DIR/bin/$PLATFORM_NAME-ld
+export RANLIB=$TOOLCHAIN_DIR/bin/$PLATFORM_NAME-ranlib
+export STRIP=$TOOLCHAIN_DIR/bin/$PLATFORM_NAME-strip
+export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
 
 GYP_DEFINES="target_arch=$ARCH"
 GYP_DEFINES+=" v8_target_arch=$ARCH"
