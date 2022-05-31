@@ -10,7 +10,7 @@
 
 if [ $# -ne 3 ]; then
   echo "$0 should have 3 parameters: ndk_path, target_arch and sdk_version"
-  exit 1
+  return 1
 fi
 
 NDK_PATH=$1
@@ -21,12 +21,12 @@ if [ $ANDROID_SDK_VERSION -lt 23 ]; then
   echo "$ANDROID_SDK_VERSION should equal or later than 23(Android 6.0)"
 fi
 
-CC_VER="6.5.0"
+CC_VER="4.9"
 
 case $ARCH in
     arm)
         DEST_CPU="arm"
-        TOOLCHAIN_NAME="armv7a-linux-androideabi"
+        TOOLCHAIN_NAME="armv7-linux-androideabi"
         ;;
     x86)
         DEST_CPU="ia32"
@@ -44,13 +44,12 @@ case $ARCH in
         ;;
     *)
         echo "Unsupported architecture provided: $ARCH"
-        exit 1
+        return 1
         ;;
 esac
 
 HOST_OS="linux"
 HOST_ARCH="x86_64"
-
 export CC_host=$(command -v gcc)
 export CXX_host=$(command -v g++)
 
@@ -59,10 +58,8 @@ major=$(echo $host_gcc_version | awk -F . '{print $1}')
 minor=$(echo $host_gcc_version | awk -F . '{print $2}')
 if [ -z $major ] || [ -z $minor ] || [ $major -lt 6 ] || ( [ $major -eq 6 ] && [ $minor -lt 3 ] ); then
   echo "host gcc $host_gcc_version is too old, need gcc 6.3.0"
-  exit 1
+  return 1
 fi
-
-echo "host gcc $host_gcc_version"
 
 SUFFIX="$TOOLCHAIN_NAME$ANDROID_SDK_VERSION"
 TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/$HOST_OS-$HOST_ARCH
@@ -70,20 +67,7 @@ TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/$HOST_OS-$HOST_ARCH
 export PATH=$TOOLCHAIN/bin:$PATH
 export CC=$TOOLCHAIN/bin/$SUFFIX-clang
 export CXX=$TOOLCHAIN/bin/$SUFFIX-clang++
-export LINK=$TOOLCHAIN/bin/$SUFFIX-clang++
-export CXXFLAGS='-D_LIBCPP_HAS_NO_OFF_T_FUNCTIONS'
 
-#export AR=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ar
-#export LD=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ld
-#export RANLIB=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ranlib
-#export STRIP=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-strip
-
-export AR_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ar
-export AS_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-as
-export LD_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ld
-export NM_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-nm
-export RANLIB_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-ranlib
-export STRIP_target=$TOOLCHAIN/bin/$TOOLCHAIN_NAME-strip
 
 GYP_DEFINES="target_arch=$ARCH"
 GYP_DEFINES+=" v8_target_arch=$ARCH"
