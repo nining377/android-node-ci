@@ -40,4 +40,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: lib-android-${{matrix.node}}-${{matrix.abi}}
-        path: node-${{matrix.node}}/out/Release/lib.target
+        path: |
+          ./build
