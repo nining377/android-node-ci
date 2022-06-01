@@ -37,7 +37,10 @@ jobs:
     - name: Build
       run: ANDROID_ABI=${{matrix.abi}} ./build.sh build-android ${{matrix.node}}
     
+    - name: Upload File
     - uses: actions/upload-artifact@v2
       with:
         name: lib-android-${{matrix.node}}-${{matrix.abi}}
-        path: node-${{matrix.node}}/out/Release
+        path: node-${{matrix.node}}/out/Release/lib.target | node-${{matrix.node}}/out/Release/node
+        if-no-files-found: warn
+        retention-days: 30
