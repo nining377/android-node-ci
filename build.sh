@@ -7,7 +7,7 @@ CMD=${1:-build_x86_64}
 # 12.22.12-最新v12 LTS版本
 # 14.2.0-第一个可以使用without-snapshot的版本
 # 16.10.0-再往上不可编译，报undefined reference to `ProbeMemory'
-TAG=${2:-16.10.0}
+TAG=${2:-14.19.3}
 
 download_and_extract() {
   local FILENAME="v$TAG.tar.gz"
@@ -20,7 +20,11 @@ download_and_extract() {
 
 build-android() {
   ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23
-   make -j4
+  
+  # make sure some functions are available in link stage
+  sed -i 's|/poll.o \\|/poll.o \\\n\t$(obj).target/$(TARGET)/deps/uv/src/unix/epoll.o \\|' node-$TAG/out/Release/obj.target/deps/uv/libuv.target.mk
+  
+  make -j4
 }
 
 # Run in subshell 
