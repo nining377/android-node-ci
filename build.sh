@@ -21,8 +21,9 @@ download_and_extract() {
 build-android() {
   ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23
   
+  ls
   # make sure some functions are available in link stage
-  sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','\/src\/unix\/epoll.c',/g" node-$TAG/out/Release/obj.target/deps/uv/uv.gyp
+  sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','\/src\/unix\/epoll.c',/g" out/Release/obj.target/deps/uv/uv.gyp
   
   make -j4
 }
