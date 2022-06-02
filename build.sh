@@ -22,8 +22,7 @@ build-android() {
   ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23
 
   # make sure some functions are available in link stage
-  grep -wq "epoll.c" deps/uv/uv.gyp && echo "contain" || echo "not contain"
-  grep -wq "epoll.c" deps/uv/uv.gyp || sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','\/src\/unix\/epoll.c',/g" deps/uv/uv.gyp
+  sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','\/src\/unix\/epoll.c',/g" deps/uv/uv.gyp
   
   make -j4
 }
