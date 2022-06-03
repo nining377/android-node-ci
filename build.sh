@@ -22,7 +22,7 @@ build-android() {
 
   # make sure some functions are available in link stage
   ver=$(echo $TAG | awk -F . '{print $1}')
-  if [ $TAG -eq 14 ]; then
+  if [ $ver -eq 14 ]; then
     sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','src\/unix\/epoll.c',/g" deps/uv/uv.gyp
   fi
   
