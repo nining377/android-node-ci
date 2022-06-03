@@ -26,7 +26,7 @@ build-android() {
     sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','src\/unix\/epoll.c',/g" deps/uv/uv.gyp
   fi
   
-  ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23
+  ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23 $TAG
 
   make -j4
 }
