@@ -4,9 +4,9 @@ set -ex
 
 # Used in ./configure.
 CMD=${1:-build_x86_64}
-# 12.22.12-最新v12 LTS版本
-# 14.2.0-第一个可以使用without-snapshot的版本
-# 16.10.0-再往上不可编译，报undefined reference to `ProbeMemory'
+# 12.22.12
+# 14.19.3
+# 16.15.1
 TAG=${2:-14.19.3}
 
 download_and_extract() {
@@ -21,7 +21,10 @@ download_and_extract() {
 build-android() {
 
   # make sure some functions are available in link stage
-  sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','src\/unix\/epoll.c',/g" deps/uv/uv.gyp
+  ver=$(echo $TAG | awk -F . '{print $1}')
+  if [ $TAG -eq 14 ]; then
+    sed -i "s/.src\/unix\/android-ifaddrs.c.,/'src\/unix\/android-ifaddrs.c','src\/unix\/epoll.c',/g" deps/uv/uv.gyp
+  fi
   
   ./android-configure $ANDROID_NDK_HOME $ANDROID_ABI 23
 

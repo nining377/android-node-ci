@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [ 14.19.3 ]
+        node: [ 12.22.12,14.19.3,16.15.1 ]
         abi: [ arm64 ]
 
     steps:
