@@ -42,7 +42,7 @@ jobs:
       with:
         name: lib-android-${{matrix.node}}-${{matrix.abi}}
         path: node-${{matrix.node}}/out/Release/lib.target
-        if-no-files-found: warn
+        if-no-files-found: ignore
         retention-days: 30
         
     - name: Upload node
@@ -50,5 +50,5 @@ jobs:
       with:
         name: node-${{matrix.node}}-${{matrix.abi}}
         path: node-${{matrix.node}}/out/Release/node
-        if-no-files-found: warn
+        if-no-files-found: ignore
         retention-days: 30
