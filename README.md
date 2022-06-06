@@ -16,4 +16,4 @@ Minimum build of v12.x、v14.x、v16.x Node for Android as of june 1,2022
 
 ## 测试
 
-<img src="https://raw.githubusercontent.com/nining377/android-node-ci/blob/main/1.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/nining377/android-node-ci/main/1.jpg" width="50%">
