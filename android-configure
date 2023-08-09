@@ -80,13 +80,13 @@ export GYP_DEFINES
 if [ -f "configure" ]; then
 	ver=$(echo $NODE_VER | awk -F . '{print $1}')
 	if [ $ver -eq 12 ]; then
-      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-npm --without-dtrace --without-etw --without-report --without-siphash --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
+      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-dtrace --without-etw --without-report --without-siphash --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
 	  echo "Build on v12.x"
 	elif [ $ver -eq 14 ]; then
-      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-npm --without-dtrace --without-etw --without-report --without-siphash --without-snapshot --without-corepack --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
+      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-dtrace --without-etw --without-report --without-siphash --without-snapshot --without-corepack --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
 	  echo "Build on v14.x"
 	elif [ $ver -eq 16 ]; then
-      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-npm --without-dtrace --without-etw --without-report --without-snapshot --without-siphash --without-corepack --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
+      ./configure --dest-cpu=$DEST_CPU --dest-os=android --without-inspector --without-intl --without-node-snapshot --without-node-code-cache --without-dtrace --without-etw --without-report --without-snapshot --without-siphash --without-corepack --openssl-no-asm --with-arm-float-abi=hard --with-arm-fpu=neon --cross-compiling --partly-static
 	  echo "Build on v16.x"
 	fi
 fi
