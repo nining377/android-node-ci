@@ -49,6 +49,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: node-${{matrix.node}}-${{matrix.abi}}
-        path: node-${{matrix.node}}/out/Release/node
+        path: node-${{matrix.node}}/out/Release/
         if-no-files-found: ignore
         retention-days: 30
