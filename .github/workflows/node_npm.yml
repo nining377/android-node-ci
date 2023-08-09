@@ -1,0 +1,54 @@
+name: Node CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [ 12.22.12,14.20.0,16.16.0 ]
+        abi: [ arm64 ]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup 32-bit dependencies
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update -y -qq
+        sudo apt-get install -y -qq build-essential gcc-multilib g++-multilib
+        
+    - name: Set Android NDK
+      env:
+        ANDROID_NDK_HOME: $ANDROID_SDK_ROOT/ndk-bundle
+      run:
+        echo $ANDROID_NDK_HOME
+        
+    - name: Grant execute permission for build.sh
+      run: chmod +x build.sh
+
+    - name: Build
+      run: ANDROID_ABI=${{matrix.abi}} ./build.sh build-android ${{matrix.node}}
+    
+    - name: Upload so
+      uses: actions/upload-artifact@v2
+      with:
+        name: lib-android-${{matrix.node}}-${{matrix.abi}}
+        path: node-${{matrix.node}}/out/Release/lib.target
+        if-no-files-found: ignore
+        retention-days: 30
+        
+    - name: Upload node
+      uses: actions/upload-artifact@v2
+      with:
+        name: node-${{matrix.node}}-${{matrix.abi}}
+        path: node-${{matrix.node}}/out/Release/node
+        if-no-files-found: ignore
+        retention-days: 30
